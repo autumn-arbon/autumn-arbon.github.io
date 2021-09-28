@@ -1,0 +1,28 @@
+#mint{
+    fill: #7fffd4;
+}
+
+#chocolate{
+    fill: #8b4513;
+}
+
+#strawberry{
+    fill: #ffb6c1;
+}
+
+#cone{
+    fill: #d2b48c;
+}
+
+rect{
+    fill: #452608;
+}
+
+line{
+    stroke: #bd9f82;
+    stroke-width: 2;
+}
+
+body{
+    text-align: center;
+}
