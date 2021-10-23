@@ -52,7 +52,7 @@
             .append("div")
         div3.text("Mouse X: , Y:");
 
-        span.on("mousemove", e =>;
+        span.on("mousemove", e => console.log(d3.pointer(e)));
 
         function handleMouseEnter(d, i) {
             d3.select(this).style("opacity", "0.5");
