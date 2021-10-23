@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <script>
+        function myFunction() {
+
+            var username = document.getElementById("username").value
+            if (username.length == 0) {
+                enterPrompt("Username", "red");
+            }
+            else if (!username.match(/^[A-Za-z]{4,12}/)) {
+                enterPrompt("a valid username", "orange");
+            }
+
+            var email = document.getElementById("email").value;
+            if (email.length == 0) {
+                enterPrompt("Email", "red");
+            }
+            else if (!email.match(/@/) || !email.match(/\.com$|\.net$|\.org$|\.edu$/)) {
+                enterPrompt("a valid email", "orange");
+            }
+
+            var password = document.getElementById("pass1").value;
+            if (password.length == 0) {
+                enterPrompt("Password", "red");
+            }
+
+            var gender = document.querySelector('input[name="gender"]:checked');
+            if (gender == null) {
+                selectPrompt("Gender", "red");
+            }
+
+            var month = document.getElementById("month");
+            month = month.options[month.selectedIndex].value;
+            console.log(month);
+            var day = document.getElementById("day");
+            var year = document.getElementById("year");
+            if (month == null || day == null || year == null) {
+                selectPrompt("Birthday", "red");
+            }
+
+
+        }
+
+        function enterPrompt(name, color) {
+            var output = document.getElementById("output");
+            var para = document.createElement("p");
+            var enterText = document.createTextNode("Please Enter " + name);
+            output.appendChild(para);
+            para.appendChild(enterText);
+
+        }
+
+        function selectPrompt(name) {
+            var output = document.getElementById("output");
+            var para = document.createElement("p");
+            var enterText = document.createTextNode("Please Select " + name);
+            output.appendChild(para);
+            para.appendChild(enterText);
+        }
+
+    </script>
+</head>
+<body>
+    <form>
+        Username: <input id="username" type="text"/>
+        <br><br>
+        Email: <input id="email" type="text"/>
+        <br><br>
+        Phone Number: <input id="phone" type="text"/>
+        <br><br>
+        Password: <input id="pass1" type="password"/>
+        <br><br>
+        Confirm Password: <input id="pass2" type="password"/>
+        <br><br>
+        Gender:
+        <input type="radio" name="gender" value="female"/>Female
+        <input type="radio" name="gender" value="male"/>Male
+        <input type="radio" name="gender" value="other"/>Other
+        <br><br>
+        Birthday:
+        <select name="month">
+            <option></option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+        <select id="day" name="day"></select>
+        <script>
+            var select = document.getElementById("day");
+            var blank = document.createElement("option");
+            select.appendChild(blank);
+            for (let i = 1; i < 32; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+        </script>
+        <select id="year" name="year"></select>
+        <script>
+            var select = document.getElementById("year");
+            var blank = document.createElement("option");
+            select.appendChild(blank);
+            for (let i = 1970; i < 2011; i++) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i;
+                select.appendChild(option);
+            }
+        </script>
+        <br><br>
+        Favorite Music Genre:
+        <input type="checkbox" name="music" value="Pop">Pop
+        <input type="checkbox" name="music" value="Hiphop">Hiphop
+        <input type="checkbox" name="music" value="Jazz">Jazz
+        <input type="checkbox" name="music" value="Rock">Rock
+        <input type="checkbox" name="music" value="Classical">Classical
+        <input type="checkbox" name="music" value="Country">Country
+        <br><br>
+        <input type="button" name="submit" value="Submit" onclick="myFunction()"/>
+        <input type="reset" name="clear" value="Clear"/>
+    </form>
+    <div id="output"></div>
+</body>
+</html>
