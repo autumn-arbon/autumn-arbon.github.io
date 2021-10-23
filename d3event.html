@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
+    <script>
+        let span = d3.select("body")
+            .append("span");
 
+
+        span.append("img")
+            .attr("src", "twitter.png")
+            .attr("width", "100")
+            .attr("height", "100")
+            .on("mouseenter", handleMouseEnter)
+            .on("mouseleave", handleMouseLeave);
+        span.append("img")
+            .attr("src", "facebook.png")
+            .attr("width", "100")
+            .attr("height", "100")
+            .on("mouseenter", handleMouseEnter)
+            .on("mouseleave", handleMouseLeave);
+        span.append("img")
+            .attr("src", "reddit.png")
+            .attr("width", "100")
+            .attr("height", "100")
+            .on("mouseenter", handleMouseEnter)
+            .on("mouseleave", handleMouseLeave);
+        span.append("img")
+            .attr("src", "linkedin.png")
+            .attr("width", "100")
+            .attr("height", "100")
+            .on("mouseenter", handleMouseEnter)
+            .on("mouseleave", handleMouseLeave);
+        span.append("img")
+            .attr("src", "instagram.png")
+            .attr("width", "100")
+            .attr("height", "100")
+            .on("mouseenter", handleMouseEnter)
+            .on("mouseleave", handleMouseLeave);
+
+        let div1 = d3.select("body")
+            .append("div")
+        div1.text("In:");
+
+        let div2 = d3.select("body")
+            .append("div")
+        div2.text("Out:");
+
+        let div3 = d3.select("body")
+            .append("div")
+        div3.text("Mouse X: , Y:");
+
+        span.on("mousemove", e =>;
+
+        function handleMouseEnter(d, i) {
+            d3.select(this).style("opacity", "0.5");
+        }
+
+        function handleMouseLeave(d, i) {
+            d3.select(this).style("opacity", "1.0");
+        }
+    </script>
 </body>
 </html>

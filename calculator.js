@@ -12,7 +12,7 @@ do {
     var y = prompt("Value of y");
     cont = confirm("Continue?");
     var result;
-    var reg = /[%\+/\-\*]/
+    var reg = /[%\+/\-\*]/;
     if (isNaN(x) || isNaN(y)) {
         result = "wrong input number";
     }

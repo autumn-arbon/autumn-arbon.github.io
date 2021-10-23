@@ -5,43 +5,72 @@
     <title>Form</title>
     <script>
         function myFunction() {
-
+            var allValid = true;
             var username = document.getElementById("username").value
             if (username.length == 0) {
                 enterPrompt("Username", "red");
+                allValid = false;
             }
             else if (!username.match(/^[A-Za-z]{4,12}/)) {
                 enterPrompt("a valid username", "orange");
+                allValid = false;
             }
 
             var email = document.getElementById("email").value;
             if (email.length == 0) {
                 enterPrompt("Email", "red");
+                allValid = false;
             }
             else if (!email.match(/@/) || !email.match(/\.com$|\.net$|\.org$|\.edu$/)) {
                 enterPrompt("a valid email", "orange");
+                allValid = false;
+            }
+
+            var phone = document.getElementById("phone").value;
+            if (phone.length == 0) {
+                enterPrompt("Phone Number", "red");
+                allValid = false;
+            }
+            else if (!phone.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}/)) {
+                enterPrompt("a valid phone number", "orange");
+                allValid = false;
             }
 
             var password = document.getElementById("pass1").value;
+            var special = /[%\+/\-\*!@#^&()\[\];:<>,\.?~\|]/;
             if (password.length == 0) {
                 enterPrompt("Password", "red");
+                allValid = false;
+            }
+            else if (!password.match(/[A-Z]/) || !password.match(/[a-z]/) || !password.match(/[0-9]/) || !password.match(special)) {
+                enterPrompt("a valid password", "orange");
+                allValid = false;
             }
 
             var gender = document.querySelector('input[name="gender"]:checked');
             if (gender == null) {
                 selectPrompt("Gender", "red");
+                allValid = false;
             }
 
             var month = document.getElementById("month");
-            month = month.options[month.selectedIndex].value;
-            console.log(month);
             var day = document.getElementById("day");
             var year = document.getElementById("year");
             if (month == null || day == null || year == null) {
                 selectPrompt("Birthday", "red");
             }
 
-
+            if (allValid) {
+                var confirm = document.getElementById("pass2").value;
+                if (password != confirm) {
+                    console.log(password);
+                    console.log(confirm);
+                    alert("Passwords do not match");
+                }
+                else {
+                    window.location.href = "index.html"
+                }
+            }
         }
 
         function enterPrompt(name, color) {
@@ -59,6 +88,13 @@
             var enterText = document.createTextNode("Please Select " + name);
             output.appendChild(para);
             para.appendChild(enterText);
+        }
+
+        function clearFunction() {
+            var output = document.getElementById("output");
+            while (output.firstChild) {
+                output.removeChild(output.firstChild);
+            }
         }
 
     </script>
@@ -130,7 +166,7 @@
         <input type="checkbox" name="music" value="Country">Country
         <br><br>
         <input type="button" name="submit" value="Submit" onclick="myFunction()"/>
-        <input type="reset" name="clear" value="Clear"/>
+        <input type="reset" name="clear" value="Clear" onclick="clearFunction()"/>
     </form>
     <div id="output"></div>
 </body>
