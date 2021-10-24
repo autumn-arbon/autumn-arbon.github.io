@@ -13,30 +13,35 @@
             .attr("src", "twitter.png")
             .attr("width", "100")
             .attr("height", "100")
+            .attr("name", "twitter")
             .on("mouseenter", handleMouseEnter)
             .on("mouseleave", handleMouseLeave);
         span.append("img")
             .attr("src", "facebook.png")
             .attr("width", "100")
             .attr("height", "100")
+            .attr("name", "facebook")
             .on("mouseenter", handleMouseEnter)
             .on("mouseleave", handleMouseLeave);
         span.append("img")
             .attr("src", "reddit.png")
             .attr("width", "100")
             .attr("height", "100")
+            .attr("name", "reddit")
             .on("mouseenter", handleMouseEnter)
             .on("mouseleave", handleMouseLeave);
         span.append("img")
             .attr("src", "linkedin.png")
             .attr("width", "100")
             .attr("height", "100")
+            .attr("name", "linkedin")
             .on("mouseenter", handleMouseEnter)
             .on("mouseleave", handleMouseLeave);
         span.append("img")
             .attr("src", "instagram.png")
             .attr("width", "100")
             .attr("height", "100")
+            .attr("name", "instagram")
             .on("mouseenter", handleMouseEnter)
             .on("mouseleave", handleMouseLeave);
 
@@ -52,14 +57,16 @@
             .append("div")
         div3.text("Mouse X: , Y:");
 
-        span.on("mousemove", e => console.log(d3.pointer(e)));
+        span.on("mousemove", e => div3.text("Mouse X: " + d3.pointer(e)[0] + " , Y: " + d3.pointer(e)[1]));
 
-        function handleMouseEnter(d, i) {
+        function handleMouseEnter(name, d, i) {
             d3.select(this).style("opacity", "0.5");
+            div1.text("In: " + d3.select(this).attr("name"));
         }
 
         function handleMouseLeave(d, i) {
             d3.select(this).style("opacity", "1.0");
+            div2.text("Out: " + d3.select(this).attr("name"));
         }
     </script>
 </body>
