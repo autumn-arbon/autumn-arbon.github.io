@@ -3,63 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
+    <style>
+        .empty {
+            color: red;
+        }
+        .change {
+            color: orange;
+        }
+    </style>
     <script>
         function myFunction() {
             var allValid = true;
+            var output = document.getElementById("output");
+            var str = ""
             var username = document.getElementById("username").value
             if (username.length == 0) {
-                enterPrompt("Username", "red");
+                str += "<p>Please enter <span class='empty'>Username</span></p>";
                 allValid = false;
             }
             else if (!username.match(/^[A-Za-z]{4,12}/)) {
-                enterPrompt("a valid username", "orange");
+                str += "<p>Please enter <span class='change'>Valid Username</span></p>";
                 allValid = false;
             }
 
             var email = document.getElementById("email").value;
             if (email.length == 0) {
-                enterPrompt("Email", "red");
+                str += "<p>Please enter <span class='empty'>Email</span></p>";
                 allValid = false;
             }
             else if (!email.match(/@/) || !email.match(/\.com$|\.net$|\.org$|\.edu$/)) {
-                enterPrompt("a valid email", "orange");
+                str += "<p>Please enter <span class='change'>Valid Email</span></p>";
                 allValid = false;
             }
 
             var phone = document.getElementById("phone").value;
             if (phone.length == 0) {
-                enterPrompt("Phone Number", "red");
+                str += "<p>Please enter <span class='empty'>Phone Number</span></p>";
                 allValid = false;
             }
             else if (!phone.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}/)) {
-                enterPrompt("a valid phone number", "orange");
+                str += "<p>Please enter <span class='change'>Valid Phone Number</span></p>";
                 allValid = false;
             }
 
             var password = document.getElementById("pass1").value;
             var special = /[%\+/\-\*!@#^&()\[\];:<>,\.?~\|]/;
             if (password.length == 0) {
-                enterPrompt("Password", "red");
+                str += "<p>Please enter <span class='empty'>Password</span></p>";
                 allValid = false;
             }
             else if (!password.match(/[A-Z]/) || !password.match(/[a-z]/) || !password.match(/[0-9]/) || !password.match(special)) {
-                enterPrompt("a valid password", "orange");
+                str += "<p>Please enter <span class='change'>Valid Password</span></p>";
                 allValid = false;
             }
 
             var gender = document.querySelector('input[name="gender"]:checked');
             if (gender == null) {
-                selectPrompt("Gender", "red");
+                str += "<p>Please select <span class='empty'>Gender</span></p>";
                 allValid = false;
             }
 
             var month = document.getElementById("month");
             var day = document.getElementById("day");
             var year = document.getElementById("year");
-            if (month == null || day == null || year == null) {
-                selectPrompt("Birthday", "red");
+            if (month.options[month.selectedIndex].text == "" || day.options[day.selectedIndex].text == "" || year.options[year.selectedIndex].text == "") {
+                str += "<p>Please select <span class='empty'>Birthday</span></p>";
             }
-
+            output.innerHTML = str;
             if (allValid) {
                 var confirm = document.getElementById("pass2").value;
                 if (password != confirm) {
@@ -71,23 +81,6 @@
                     window.location.href = "index.html"
                 }
             }
-        }
-
-        function enterPrompt(name, color) {
-            var output = document.getElementById("output");
-            var para = document.createElement("p");
-            var enterText = document.createTextNode("Please Enter " + name);
-            output.appendChild(para);
-            para.appendChild(enterText);
-
-        }
-
-        function selectPrompt(name) {
-            var output = document.getElementById("output");
-            var para = document.createElement("p");
-            var enterText = document.createTextNode("Please Select " + name);
-            output.appendChild(para);
-            para.appendChild(enterText);
         }
 
         function clearFunction() {
@@ -117,8 +110,8 @@
         <input type="radio" name="gender" value="other"/>Other
         <br><br>
         Birthday:
-        <select name="month">
-            <option></option>
+        <select id="month" name="month">
+            <option> </option>
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
@@ -136,6 +129,7 @@
         <script>
             var select = document.getElementById("day");
             var blank = document.createElement("option");
+            blank.value = "";
             select.appendChild(blank);
             for (let i = 1; i < 32; i++) {
                 var option = document.createElement("option");
@@ -148,6 +142,7 @@
         <script>
             var select = document.getElementById("year");
             var blank = document.createElement("option");
+            blank.value = "";
             select.appendChild(blank);
             for (let i = 1970; i < 2011; i++) {
                 var option = document.createElement("option");
